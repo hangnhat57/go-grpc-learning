@@ -1,0 +1,22 @@
+syntax = "proto3";
+ package user;
+ option go_package="pb";
+import "user_message.proto";
+
+ message CreateUserRequest{
+     User user = 1;
+ }
+ message CreateUserResponse{
+     string message = 1;
+}
+message FindUserByNameRequest{
+    string keyword = 1;
+}
+message Empty {
+
+}
+ service UserService{
+     rpc CreateUser (CreateUserRequest) returns (CreateUserResponse);
+     rpc FindUserByName (FindUserByNameRequest) returns (stream User);
+     rpc GetAllUsers(Empty) returns (stream User);
+ }
